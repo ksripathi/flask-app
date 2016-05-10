@@ -3,17 +3,19 @@
 Run =setup.py= file to install pre requisites
 #+begin_src
 python setup.py install
-#+begin_end
+#+end_src
+
 * Configure database
 * Edit file =apilayer.py= and change =paswd= =dbname=
+
 #+begin_src
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:paswd@localhost/dbname'
-#+begin_end
+#+end_src
 * Run server
 #+begin_src
 python apilayer.py
-#+begin_end
+#+end_src
 * Test api on browser
 *#+begin_src
 http://localhost:5000/users/admin
-#+begin_end
+#+end_src
