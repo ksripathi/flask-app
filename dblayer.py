@@ -20,5 +20,12 @@ class User(db.Model):
     def __repr__(self):
         return "Name = %s, user = %s, path = %s" % \
             (self.username, self.id, self.email)
-#    return '<User %r>' % self.username
+
+    def to_client(self):
+        return {
+            'id': self.id,
+            'email': self.username,
+        
+        }
+    #    return '<User %r>' % self.username
  

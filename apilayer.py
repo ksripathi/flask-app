@@ -1,9 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
+import json
 from flask_sqlalchemy import SQLAlchemy
 from dblayer import *
+from utils import jsonify_list
 app = Flask(__name__)
 #SQLALCHEMY_DATABASE_URI = 'mysql+oursql://root:vlead123@localhost/demo'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:paswd@localhost/dbname'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:vlead123@localhost/demo'
 
 
 @app.route("/users/<username>")
@@ -18,7 +20,10 @@ def hello(username):
 @app.route("/users")
 def users():
     users = User.query.all()
-    return jsonify_list([i.to_client() for i in User.get_all()])
+    return jsonify_list([i.to_client() for i in users])
+#    return make_response(json.dumps(users), 200,
+ #                        {'content-type': 'application/json'})
+
     
 
 if __name__ == "__main__":
