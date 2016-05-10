@@ -16,6 +16,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:paswd@localhost/dbn
 python apilayer.py
 #+end_src
 * Test api on browser
-*#+begin_src
+#+begin_src
 http://localhost:5000/users/admin
 #+end_src
