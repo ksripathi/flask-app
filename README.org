@@ -1,0 +1,21 @@
+# flask-app
+* Install pre requisites
+Run =setup.py= file to install pre requisites
+#+begin_src
+python setup.py install
+#+end_src
+
+* Configure database
+- Edit file =apilayer.py= and change =paswd= =dbname=
+
+#+begin_src
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:paswd@localhost/dbname'
+#+end_src
+* Run server
+#+begin_src
+python apilayer.py
+#+end_src
+* Test api on browser
+#+begin_src
+http://localhost:5000/users/admin
+#+end_src
