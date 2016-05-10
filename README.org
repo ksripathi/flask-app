@@ -6,7 +6,7 @@ python setup.py install
 #+end_src
 
 * Configure database
-* Edit file =apilayer.py= and change =paswd= =dbname=
+- Edit file =apilayer.py= and change =paswd= =dbname=
 
 #+begin_src
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:paswd@localhost/dbname'
