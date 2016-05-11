@@ -1,9 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
+<font color="green">{{ status }}</font>
+<form action="/login" method="POST">
+  <br><br><br>
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-2">
+      User
+    </div>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="text"> <br><br>
+    </div>
+    <div class="col-md-2">
+      Password
+    </div>
+    <div class="col-md-10">
+      <input type="password" class="form-control" name="pswd"> <br><br>
+    </div>
+    <div class="col-md-10">
+      <div class="col-md-4">
+	<input type="submit" value="Login" class="btn btn-primary">
+      </div>
+      <div class="col-md-4">
+	<a href="/register" text-decoration="none"><input type="button" value="Register" class="btn btn-primary"></a>
+      </div>
+     
+    </div>
+    
+  </div>
+</form>
+<div class="col-md-12">
+  <div class="col-md-5"></div>
+  <div class="col-md-6"><br><br>
+<blink><font color="red">  {{ user_exist_message }}</font></blink>
+   </div>
+</div>
+
+<!--
 <form action="/login" method="POST">
   User <input type="text" name="text"><p>
   Password <input type="password" name="pswd"><br><br>
   <input type="submit" value="Login">
   <a href="/register"><input type="button"  value="Register"></a>
 </form>
+-->
 {% endblock %}

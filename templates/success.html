@@ -1,14 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-<a href="/logout">Logout</a>
-<h2>List of all registered users </h2><br>
- {% for user in users %}
-    
-    <p> User id   : <b>{{ user.id }}</b>
-    <p> User Name : <b>{{ user.username }}</b> 
-    <p> User Email: <b> {{ user.email }} </b> 
-    <br><br>
-{% endfor %}
+<h2>List of registered users </h2><br>
+ 
+    <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-stripped">
+	<thead>
+	  <tr>
+            <th>ID</th>
+	    <th>Name</th>
+	    <th>Email-id</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {% for user in users %}
+	  <tr>
+	    <td>{{ user.id }}</td>
+	    <td>{{ user.username }}</td>
+	    <td>{{ user.email }}</td>
+	  </tr>
+	  {% endfor %}
+	</tbody>
+      </table>
+    </div>
+  </div>
+
+
 
 
 

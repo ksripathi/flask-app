@@ -3,6 +3,7 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from dblayer import *
 from utils import jsonify_list
+
 app = Flask(__name__)
 app.secret_key = 'djfjsdkjXXS7979dfdfd'
 #SQLALCHEMY_DATABASE_URI = 'mysql+oursql://root:vlead123@localhost/demo'
@@ -18,12 +19,15 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     else:
-        username = str(request.form['name'])
-        email = str(request.form['password'])
-        newuser = User(username, email)
+        username = str(request.form['user'])
+        password = str(request.form['pswd'])
+        email = str(request.form['mobile'])
+        mobile = str(request.form['email'])
+        db.session.flush()
+        newuser = Users(username, email, password, mobile)
         db.session.add(newuser)
         db.session.commit()
-        return "dfd"
+        return render_template('index.html', status="Successfully register please login")
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -37,15 +41,15 @@ def login():
         print name, type(name)
         pswd = str(request.form['pswd'])
         try:
-            #user = User.query.filter(username == name, email == pswd)
-            user = User.query.filter_by(username=name, email=pswd).first_or_404()
-            print user.email
-            if user.username:
+            #user = Users.query.filter(username == name, email == pswd)
+            user = Users.query.filter_by(username=name, email=pswd).first_or_404()
+            #print user.email
+            if user.username and user.email:
                 session['email'] = user.email
                 #return render_template('success.html', name=user.username, email=user.email)
                 return redirect('/users')
         except:
-            return "User doesn't exist"
+            return render_template('index.html', user_exist_message="User or Password is wrong")
 
 @app.route("/logout", methods=['GET'])
 def logout():
@@ -57,7 +61,7 @@ def logout():
 def users():
     if request.method == 'GET':
         if ('email' in session):
-            users = User.query.all()
+            users = Users.query.all()
             return render_template('success.html', users=users)
         else:
             return redirect('/')

@@ -1,8 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
+
+<form action="/register" method="POST">
+  <br><br><br>
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-2">
+      User
+    </div>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="user" required> <br><br>
+    </div>
+    <div class="col-md-2">
+      Password
+    </div>
+    <div class="col-md-10">
+      <input type="password" class="form-control" name="pswd" required> <br><br>
+    </div>
+    <div class="col-md-2">
+      Email-id
+    </div>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="email" required> <br><br>
+    </div>
+    <div class="col-md-2">
+      Mobile No
+    </div>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="mobile" required> <br><br>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
+      <input type="submit" value="submit" class="btn btn-primary">
+      <a href="/" text-decoration="none">&nbsp;&nbsp;<input type="submit" value="Cancel" class="btn btn-primary"></a>
+    </div>
+  </div>
+</form>
+
+    <!--
+     User : <input type="text" class="form-control" name="user"> <br><br>
+     Password :<input type="password" class="form-control" name="password"><br><br>
+     Email id : <input type="text" class="form-control" name="email"> <br><br>
+     Mobile : <input type="text" class="form-control" name="mobile"> <br><br>
+      <input type="submit" value="submit" class="btn btn-primary">
+      <a href="#/manage-workshops">Cancel</a>
+    </dev>
+</form>
 <form action="/register" method="POST">
   User <input type="text" name="name"><p>
   Password <input type="password" name="password"><br><br>
 <input type="submit" value="Register">
-</form>
+</form>-->
 {% endblock %}
