@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, render_template, request, session, redirect
+from flask import Flask, jsonify, make_response, render_template, request, session, redirect, flash
 import json
 from flask_sqlalchemy import SQLAlchemy
 from dblayer import *
@@ -21,18 +21,21 @@ def login():
             return redirect('/')
         
     else:
-        get_name = request.form['text']
-        name = str(get_name)
-        get_pswd = request.form['pswd']
-        pswd = str(get_pswd)
-        user = User.query.filter_by(username=name).first_or_404()
-        if user.username:
-            session['email'] = user.email
-            return render_template('success.html', name=session['email'], paswd=pswd)
+        name = str(request.form['text'])
+        pswd = str(request.form['pswd'])
+        try:
+            user = User.query.filter_by(username=name).first_or_404()
+            if user.username:
+                session['email'] = user.email
+                flash('You were logged in')
+                return render_template('success.html', name=user.username, email=user.email)
+        except:
+            return "User doesn't exist"
 
 @app.route("/logout", methods=['GET'])
 def logout():
     session.pop('email', None)
+    flash('You were loged out')
     return redirect("/")
 #    return render_template('index.html')
 '''
