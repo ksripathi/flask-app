@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Your Details </h2><br>
-    <span>Name : {{ name }}</span><br><br><br>
-    <span>Email : {{ email }}</span><br><br><br>    
 <a href="/logout">Logout</a>
+<h2>List of all registered users </h2><br>
+ {% for user in users %}
+    
+    <p> User id   : <b>{{ user.id }}</b>
+    <p> User Name : <b>{{ user.username }}</b> 
+    <p> User Email: <b> {{ user.email }} </b> 
+    <br><br>
+{% endfor %}
+
+
 
 {% endblock %}

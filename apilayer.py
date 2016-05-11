@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.secret_key = 'djfjsdkjXXS7979dfdfd'
 #SQLALCHEMY_DATABASE_URI = 'mysql+oursql://root:vlead123@localhost/demo'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+oursql://root:vlead123@localhost/demo'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 @app.route("/")
 def index():
@@ -22,28 +24,39 @@ def login():
         
     else:
         name = str(request.form['text'])
+        print name, type(name)
         pswd = str(request.form['pswd'])
         try:
+            #user = User.query.filter(username == name, email == pswd)
             user = User.query.filter_by(username=name).first_or_404()
+            print user.email
             if user.username:
                 session['email'] = user.email
-                flash('You were logged in')
-                return render_template('success.html', name=user.username, email=user.email)
+                #return render_template('success.html', name=user.username, email=user.email)
+                return redirect('/users')
         except:
             return "User doesn't exist"
 
 @app.route("/logout", methods=['GET'])
 def logout():
     session.pop('email', None)
-    flash('You were loged out')
     return redirect("/")
 #    return render_template('index.html')
-'''
+
 @app.route("/users")
 def users():
-    users = User.query.all()
-    return jsonify_list([i.to_client() for i in users])
-'''
+    if request.method == 'GET':
+        if ('email' in session):
+            users = User.query.all()
+            return render_template('success.html', users=users)
+        else:
+            return redirect('/')
+    
+
+    
+
+    #return jsonify_list([i.to_client() for i in users])
+
 
 if __name__ == "__main__":
     app.run(debug=True)
