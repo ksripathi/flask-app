@@ -13,7 +13,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 @app.route("/")
 def index():
     return render_template('index.html')
-
+@app.route("/register", methods=['GET','POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        username = str(request.form['name'])
+        email = str(request.form['password'])
+        newuser = User(username, email)
+        db.session.add(newuser)
+        db.session.commit()
+        return "dfd"
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -28,7 +38,7 @@ def login():
         pswd = str(request.form['pswd'])
         try:
             #user = User.query.filter(username == name, email == pswd)
-            user = User.query.filter_by(username=name).first_or_404()
+            user = User.query.filter_by(username=name, email=pswd).first_or_404()
             print user.email
             if user.username:
                 session['email'] = user.email
