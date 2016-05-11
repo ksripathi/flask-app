@@ -13,7 +13,7 @@ def index():
     return render_template('index.html')
 
 @app.route("/login", methods=['GET', 'POST'])
-def hello():
+def login():
     if request.method == 'GET':
         if ('email' in session):
             return render_template('success.html')
@@ -41,5 +41,6 @@ def users():
     users = User.query.all()
     return jsonify_list([i.to_client() for i in users])
 '''
+
 if __name__ == "__main__":
     app.run(debug=True)
