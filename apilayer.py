@@ -37,12 +37,12 @@ def login():
             return redirect('/')
         
     else:
-        name = str(request.form['text'])
+        name = str(request.form['name'])
         print name, type(name)
         pswd = str(request.form['pswd'])
         try:
             #user = Users.query.filter(username == name, email == pswd)
-            user = Users.query.filter_by(username=name, email=pswd).first_or_404()
+            user = Users.query.filter_by(username=name, password=pswd).first_or_404()
             #print user.email
             if user.username and user.email:
                 session['email'] = user.email
